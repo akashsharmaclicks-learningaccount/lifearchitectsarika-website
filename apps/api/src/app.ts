@@ -1,16 +1,17 @@
 import express from "express";
 import cors from "cors";
+import healthRouter from "./modules/health/health.routes";
+import { notFoundMiddleware } from "./common/middlewares/not-found.middleware";
+import { errorMiddleware } from "./common/middlewares/error.middleware";
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "API is running successfully",
-    data: {},
-  });
-});
+app.use("/api/v1/health", healthRouter);
+
+app.use(notFoundMiddleware);
+app.use(errorMiddleware);
 
 export default app;
