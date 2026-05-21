@@ -18,3 +18,4 @@ A professional full-stack astrology and numerology consultation platform.
 apps/web       - Frontend application
 apps/api       - Backend API
 packages/shared - Shared types and constants
+```
