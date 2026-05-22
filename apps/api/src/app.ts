@@ -14,4 +14,4 @@ app.use("/api/v1/health", healthRouter);
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
- export default app;
+export default app;
