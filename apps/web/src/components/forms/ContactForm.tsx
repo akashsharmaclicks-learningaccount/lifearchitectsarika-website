@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Select } from "@/components/ui/Select";
 import { submitContactInquiry } from "@/services/contact.service";
 import { ContactInquiryPayload } from "@/types/contact.types";
+import { SERVICE_OPTIONS } from "@/constants/service-options";
 
 const initialFormData: ContactInquiryPayload = {
   name: "",
@@ -20,6 +21,7 @@ export function ContactForm() {
   const [formData, setFormData] = useState<ContactInquiryPayload>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -40,12 +42,19 @@ export function ContactForm() {
       const response = await submitContactInquiry(formData);
 
       if (response.success) {
+        setIsSuccess(true);
+
         setResponseMessage("Thank you! Your inquiry has been submitted successfully.");
+
         setFormData(initialFormData);
       } else {
+        setIsSuccess(false);
+
         setResponseMessage(response.message || "Something went wrong. Please try again.");
       }
     } catch {
+      setIsSuccess(false);
+
       setResponseMessage("Unable to submit inquiry. Please try again later.");
     } finally {
       setIsSubmitting(false);
@@ -84,6 +93,7 @@ export function ContactForm() {
       <Select
         label="Service Interested In"
         name="service"
+        required
         value={formData.service}
         onChange={(event) =>
           setFormData((previousData) => ({
@@ -91,7 +101,7 @@ export function ContactForm() {
             service: event.target.value,
           }))
         }
-        options={["Numerology", "Tarot", "Reiki Healing"]}
+        options={[...SERVICE_OPTIONS]}
       />
 
       <Textarea
@@ -107,7 +117,15 @@ export function ContactForm() {
         {isSubmitting ? "Submitting..." : "Submit Inquiry"}
       </Button>
 
-      {responseMessage && <p className="text-sm font-medium text-gray-700">{responseMessage}</p>}
+      {responseMessage && (
+        <p
+          className={`rounded-lg px-4 py-3 text-sm font-medium ${
+            isSuccess ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
+          }`}
+        >
+          {responseMessage}
+        </p>
+      )}
     </form>
   );
 }
