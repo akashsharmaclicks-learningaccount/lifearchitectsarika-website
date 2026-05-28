@@ -1,15 +1,29 @@
+type ButtonVariant = "primary" | "secondary";
+
 type ButtonProps = {
   children: React.ReactNode;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  variant?: ButtonVariant;
 };
 
-export function Button({ children, type = "button", disabled = false }: ButtonProps) {
+const buttonVariants: Record<ButtonVariant, string> = {
+  primary: "bg-[var(--primary)] text-white hover:bg-[var(--primary-hover)]",
+  secondary:
+    "border border-[var(--border)] bg-[var(--card)] text-foreground hover:border-[var(--primary)]",
+};
+
+export function Button({
+  children,
+  type = "button",
+  disabled = false,
+  variant = "primary",
+}: ButtonProps) {
   return (
     <button
       type={type}
       disabled={disabled}
-      className="rounded-lg bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+      className={`rounded-lg px-6 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${buttonVariants[variant]}`}
     >
       {children}
     </button>

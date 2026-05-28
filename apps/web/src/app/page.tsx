@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Navbar />
 
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-background">
         <HeroSection />
         <ServicesSection />
         <AboutSection />

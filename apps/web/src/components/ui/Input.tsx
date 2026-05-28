@@ -27,7 +27,7 @@ export function Input({
         required={required}
         value={value}
         onChange={onChange}
-        className="rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-black"
+        className="resize-none rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm text-foreground outline-none transition placeholder:text-gray-400 focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--secondary)]"
       />
     </label>
   );

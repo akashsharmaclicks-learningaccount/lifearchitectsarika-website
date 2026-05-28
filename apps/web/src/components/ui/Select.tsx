@@ -17,7 +17,7 @@ export function Select({ label, name, required = false, value, onChange, options
         required={required}
         value={value}
         onChange={onChange}
-        className="rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-black"
+        className="rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[var(--primary)] focus:ring-4 focus:ring-[var(--secondary)]"
       >
         <option value="">Select a service</option>
 

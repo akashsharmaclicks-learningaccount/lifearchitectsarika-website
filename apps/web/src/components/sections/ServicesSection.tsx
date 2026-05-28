@@ -18,16 +18,18 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="bg-gray-50 px-6 py-20">
+    <section id="services" className="bg-[var(--section-background)] px-6 py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-500">Services</p>
+          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--muted)]">
+            Services
+          </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
             Guidance for Every Phase of Life
           </h2>
 
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-[var(--muted)]">
             Explore personalized spiritual and numerology-based services designed to bring clarity,
             healing, and direction.
           </p>
@@ -37,11 +39,11 @@ export function ServicesSection() {
           {services.map((service) => (
             <article
               key={service.title}
-              className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
-              <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
+              <h3 className="text-xl font-semibold text-foreground">{service.title}</h3>
 
-              <p className="mt-4 text-sm leading-6 text-gray-600">{service.description}</p>
+              <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{service.description}</p>
             </article>
           ))}
         </div>
