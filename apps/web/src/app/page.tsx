@@ -1,26 +1,23 @@
-import { ContactForm } from "@/components/forms/ContactForm";
-
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { HeroSection } from "@/components/sections/HeroSection";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { ContactSection } from "@/components/sections/ContactSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white px-6 py-16">
-      <section className="mx-auto max-w-4xl text-center">
-        <p className="mb-3 text-sm font-medium uppercase tracking-[0.3em] text-gray-500">
-          Life Architect Sarika
-        </p>
+    <>
+      <Navbar />
 
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 md:text-6xl">
-          Astrology & Numerology Consultation
-        </h1>
-
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-600">
-          Discover meaningful guidance through numerology and spiritual insights. Share your inquiry
-          and we will connect with you soon.
-        </p>
-      </section>
-
-      <section className="mt-14">
-        <ContactForm />
-      </section>
-    </main>
+      <main className="min-h-screen bg-white">
+        <HeroSection />
+        <ServicesSection />
+        <AboutSection />
+        <TestimonialsSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </>
   );
 }
