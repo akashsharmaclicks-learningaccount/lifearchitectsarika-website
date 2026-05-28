@@ -3,9 +3,18 @@ type TextareaProps = {
   name: string;
   placeholder?: string;
   required?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
-export function Textarea({ label, name, placeholder, required = false }: TextareaProps) {
+export function Textarea({
+  label,
+  name,
+  placeholder,
+  required = false,
+  value,
+  onChange,
+}: TextareaProps) {
   return (
     <label className="flex flex-col gap-2">
       <span className="text-sm font-medium text-gray-700">{label}</span>
@@ -14,6 +23,8 @@ export function Textarea({ label, name, placeholder, required = false }: Textare
         placeholder={placeholder}
         required={required}
         rows={5}
+        value={value}
+        onChange={onChange}
         className="resize-none rounded-lg border border-gray-300 px-4 py-3 text-sm outline-none transition focus:border-black"
       />
     </label>
