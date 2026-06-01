@@ -1,18 +1,4 @@
-const testimonials = [
-  {
-    name: "Diksha Sharma",
-    text: "The session gave me clarity and helped me understand my situation with a calmer mind.",
-  },
-  {
-    name: "Anurag Sharma",
-    text: "The guidance felt personal, thoughtful, and genuinely supportive.",
-  },
-  {
-    name: "Kanchan Sharma",
-    text: "A peaceful and insightful experience that helped me feel more balanced.",
-  },
-];
-
+import { testimonials } from "@/content/testimonials";
 export function TestimonialsSection() {
   return (
     <section className="bg-[var(--section-background)] px-6 py-20">
