@@ -1,18 +1,23 @@
+import { Gem, Sparkles, WandSparkles } from "lucide-react";
+
 const services = [
   {
     title: "Numerology",
     description:
       "Gain meaningful insights through numbers connected with your name, birth date, and life path.",
+    icon: Gem,
   },
   {
     title: "Tarot",
     description:
       "Receive intuitive guidance and clarity for personal, emotional, and life-related questions.",
+    icon: Sparkles,
   },
   {
     title: "Reiki Healing",
     description:
       "Experience calming energy healing sessions focused on balance, relaxation, and inner peace.",
+    icon: WandSparkles,
   },
 ];
 
@@ -36,16 +41,24 @@ export function ServicesSection() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {services.map((service) => (
-            <article
-              key={service.title}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
-            >
-              <h3 className="text-xl font-semibold text-foreground">{service.title}</h3>
+          {services.map((service) => {
+            const Icon = service.icon;
 
-              <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{service.description}</p>
-            </article>
-          ))}
+            return (
+              <article
+                key={service.title}
+                className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="mb-5 inline-flex rounded-2xl bg-[var(--secondary)] p-3 text-[var(--primary)]">
+                  <Icon size={24} strokeWidth={1.8} />
+                </div>
+
+                <h3 className="text-xl font-semibold text-foreground">{service.title}</h3>
+
+                <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{service.description}</p>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

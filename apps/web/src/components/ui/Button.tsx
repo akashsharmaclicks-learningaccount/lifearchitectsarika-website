@@ -23,7 +23,7 @@ export function Button({
     <button
       type={type}
       disabled={disabled}
-      className={`rounded-lg px-6 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 ${buttonVariants[variant]}`}
+      className={`rounded-lg px-6 py-3 text-sm font-semibold transition duration-200 ease-out hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 ${buttonVariants[variant]}`}
     >
       {children}
     </button>

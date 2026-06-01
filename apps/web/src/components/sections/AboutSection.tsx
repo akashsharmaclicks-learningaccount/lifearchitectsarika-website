@@ -3,9 +3,11 @@ export function AboutSection() {
     <section id="about" className="px-6 py-20">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center">
         <div>
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--muted)]">About</p>
+          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--muted)]">
+            About
+          </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
             Meet Sarika, Your Guide Towards Clarity and Inner Balance
           </h2>
 
@@ -22,16 +24,24 @@ export function AboutSection() {
 
         <div className="rounded-3xl bg-[var(--section-background)] p-8">
           <div className="rounded-2xl bg-[var(--card)] p-6 shadow-sm">
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-[var(--muted)]">
-              Approach
+            <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-[var(--secondary)] text-4xl font-bold text-[var(--primary)]">
+              S
+            </div>
+
+            <h3 className="mt-6 text-center text-xl font-semibold text-foreground">Sarika</h3>
+
+            <p className="mt-2 text-center text-sm text-[var(--muted)]">
+              Numerology • Tarot • Reiki Healing
             </p>
 
-            <ul className="mt-5 space-y-4 text-sm leading-6 text-[var(--muted)]">
-              <li>• Personalized spiritual guidance</li>
-              <li>• Supportive and calm consultation experience</li>
-              <li>• Focus on clarity, healing, and self-awareness</li>
-              <li>• Practical insights for life decisions</li>
-            </ul>
+            <div className="mt-6 border-t border-[var(--border)] pt-6">
+              <ul className="space-y-4 text-sm leading-6 text-[var(--muted)]">
+                <li>• Personalized spiritual guidance</li>
+                <li>• Supportive consultation experience</li>
+                <li>• Focus on healing and self-awareness</li>
+                <li>• Practical insights for life decisions</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <article
               key={testimonial.name}
-              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm transition duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
             >
               <p className="text-sm leading-6 text-[var(--muted)]">“{testimonial.text}”</p>
 

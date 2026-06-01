@@ -9,13 +9,13 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-8 text-sm font-medium text-[var(--muted)] md:flex">
-          <a href="#services" className="hover:text-foreground">
+          <a href="#services" className="transition hover:text-foreground">
             Services
           </a>
-          <a href="#about" className="hover:text-foreground">
+          <a href="#about" className="transition hover:text-foreground">
             About
           </a>
-          <a href="#contact" className="hover:text-foreground">
+          <a href="#contact" className="transition hover:text-foreground">
             Contact
           </a>
         </div>
