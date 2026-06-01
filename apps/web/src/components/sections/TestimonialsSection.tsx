@@ -15,18 +15,18 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="bg-gray-50 px-6 py-20">
+    <section className="bg-[var(--section-background)] px-6 py-20">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-gray-500">
+          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--muted)]">
             Testimonials
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+          <h2 className="mt-3 text-3xl font-bold text-foreground md:text-4xl">
             Experiences Shared by Clients
           </h2>
 
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-[var(--muted)]">
             A few words from people who have experienced guidance, clarity, and healing.
           </p>
         </div>
@@ -35,11 +35,11 @@ export function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <article
               key={testimonial.name}
-              className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm"
+              className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 shadow-sm"
             >
-              <p className="text-sm leading-6 text-gray-600">“{testimonial.text}”</p>
+              <p className="text-sm leading-6 text-[var(--muted)]">“{testimonial.text}”</p>
 
-              <p className="mt-5 text-sm font-semibold text-gray-900">{testimonial.name}</p>
+              <p className="mt-5 text-sm font-semibold text-foreground">{testimonial.name}</p>
             </article>
           ))}
         </div>
