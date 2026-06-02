@@ -4,7 +4,7 @@ export const testimonials = [
     text: "The session gave me clarity and helped me understand my situation with a calmer mind.",
   },
   {
-    name: "Diksha Singh",
+    name: "Diksha Sharma",
     text: "The guidance felt personal, thoughtful, and genuinely supportive.",
   },
   {
