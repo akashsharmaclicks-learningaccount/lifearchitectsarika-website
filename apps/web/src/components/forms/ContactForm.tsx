@@ -17,12 +17,14 @@ const initialFormData: ContactInquiryPayload = {
   message: "",
 };
 
+type FormErrors = Partial<Record<keyof ContactInquiryPayload, string>>;
+
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactInquiryPayload>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [responseMessage, setResponseMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-
+  const [errors, setErrors] = useState<FormErrors>({});
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
@@ -30,11 +32,51 @@ export function ContactForm() {
       ...previousData,
       [name]: value,
     }));
+    setErrors((previousErrors) => ({
+      ...previousErrors,
+      [name]: undefined,
+    }));
   };
+  const validateForm = () => {
+    const newErrors: FormErrors = {};
 
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required.";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required.";
+    } else if (formData.phone.trim().length < 10) {
+      newErrors.phone = "Phone number must be at least 10 digits.";
+    }
+
+    if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (!formData.service?.trim()) {
+      newErrors.service = "Please select a service.";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required.";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters.";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const isValid = validateForm();
 
+    if (!isValid) {
+      setIsSuccess(false);
+      setResponseMessage("Please fix the highlighted fields before submitting.");
+      return;
+    }
     setIsSubmitting(true);
     setResponseMessage("");
 
@@ -47,6 +89,7 @@ export function ContactForm() {
         setResponseMessage("Thank you! Your inquiry has been submitted successfully.");
 
         setFormData(initialFormData);
+        setErrors({});
       } else {
         setIsSuccess(false);
 
@@ -62,7 +105,7 @@ export function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto flex max-w-xl flex-col gap-5">
+    <form noValidate onSubmit={handleSubmit} className="mx-auto flex max-w-xl flex-col gap-5">
       <Input
         label="Full Name"
         name="name"
@@ -70,6 +113,7 @@ export function ContactForm() {
         required
         value={formData.name}
         onChange={handleChange}
+        error={errors.name}
       />
 
       <Input
@@ -79,6 +123,7 @@ export function ContactForm() {
         required
         value={formData.phone}
         onChange={handleChange}
+        error={errors.phone}
       />
 
       <Input
@@ -88,6 +133,7 @@ export function ContactForm() {
         placeholder="Enter your email"
         value={formData.email}
         onChange={handleChange}
+        error={errors.email}
       />
 
       <Select
@@ -95,13 +141,19 @@ export function ContactForm() {
         name="service"
         required
         value={formData.service}
-        onChange={(event) =>
+        onChange={(event) => {
           setFormData((previousData) => ({
             ...previousData,
             service: event.target.value,
-          }))
-        }
+          }));
+
+          setErrors((previousErrors) => ({
+            ...previousErrors,
+            service: undefined,
+          }));
+        }}
         options={[...SERVICE_OPTIONS]}
+        error={errors.service}
       />
 
       <Textarea
@@ -111,6 +163,7 @@ export function ContactForm() {
         required
         value={formData.message}
         onChange={handleChange}
+        error={errors.message}
       />
 
       <Button type="submit" disabled={isSubmitting}>
