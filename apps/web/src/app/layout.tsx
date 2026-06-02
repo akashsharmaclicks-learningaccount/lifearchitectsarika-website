@@ -16,6 +16,16 @@ export const metadata: Metadata = {
   title: "Life Architect Sarika | Numerology, Tarot & Reiki Healing",
   description:
     "Discover guidance through numerology, tarot, and Reiki healing with Life Architect Sarika.",
+    keywords: [
+      "KP Astrology",
+      "Vedic Numerology",
+      "Life Architect Sarika",
+      "Numerology",
+      "Tarot",
+      "Reiki Healing",
+      "Spiritual Guidance",
+      "Consultation",
+    ],  
 };
 
 export default function RootLayout({
