@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
@@ -22,9 +23,8 @@ type FormErrors = Partial<Record<keyof ContactInquiryPayload, string>>;
 export function ContactForm() {
   const [formData, setFormData] = useState<ContactInquiryPayload>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [responseMessage, setResponseMessage] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
 
@@ -37,6 +37,7 @@ export function ContactForm() {
       [name]: undefined,
     }));
   };
+
   const validateForm = () => {
     const newErrors: FormErrors = {};
 
@@ -68,37 +69,30 @@ export function ContactForm() {
 
     return Object.keys(newErrors).length === 0;
   };
+  
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const isValid = validateForm();
 
     if (!isValid) {
-      setIsSuccess(false);
-      setResponseMessage("Please fix the highlighted fields before submitting.");
+      toast.error("Please fix the highlighted fields before submitting.");
       return;
     }
     setIsSubmitting(true);
-    setResponseMessage("");
 
     try {
       const response = await submitContactInquiry(formData);
 
       if (response.success) {
-        setIsSuccess(true);
-
-        setResponseMessage("Thank you! Your inquiry has been submitted successfully.");
+        toast.success("Your inquiry has been submitted successfully.");
 
         setFormData(initialFormData);
         setErrors({});
       } else {
-        setIsSuccess(false);
-
-        setResponseMessage(response.message || "Something went wrong. Please try again.");
+        toast.error(response.message || "Something went wrong. Please try again.");
       }
     } catch {
-      setIsSuccess(false);
-
-      setResponseMessage("Unable to submit inquiry. Please try again later.");
+      toast.error("Unable to submit inquiry. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -169,16 +163,6 @@ export function ContactForm() {
       <Button type="submit" isLoading={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Submit Inquiry"}
       </Button>
-
-      {responseMessage && (
-        <p
-          className={`rounded-lg px-4 py-3 text-sm font-medium ${
-            isSuccess ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
-          }`}
-        >
-          {responseMessage}
-        </p>
-      )}
     </form>
   );
 }
