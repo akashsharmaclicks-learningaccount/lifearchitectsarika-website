@@ -5,6 +5,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   variant?: ButtonVariant;
+  isLoading?: boolean;
 };
 
 const buttonVariants: Record<ButtonVariant, string> = {
@@ -18,13 +19,18 @@ export function Button({
   type = "button",
   disabled = false,
   variant = "primary",
+  isLoading = false,
 }: ButtonProps) {
   return (
     <button
       type={type}
-      disabled={disabled}
-      className={`rounded-lg px-6 py-3 text-sm font-semibold transition duration-200 ease-out hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 ${buttonVariants[variant]}`}
+      disabled={disabled || isLoading}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition duration-200 ease-out hover:-translate-y-0.5 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 ${buttonVariants[variant]}`}
     >
+      {isLoading && (
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+      )}
+
       {children}
     </button>
   );

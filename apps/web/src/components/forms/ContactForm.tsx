@@ -166,7 +166,7 @@ export function ContactForm() {
         error={errors.message}
       />
 
-      <Button type="submit" disabled={isSubmitting}>
+      <Button type="submit" isLoading={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Submit Inquiry"}
       </Button>
 
