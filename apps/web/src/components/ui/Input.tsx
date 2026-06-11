@@ -6,6 +6,8 @@ type InputProps = {
   required?: boolean;
   value?: string;
   error?: string;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  maxLength?: number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -17,6 +19,8 @@ export function Input({
   required = false,
   value,
   error,
+  inputMode,
+  maxLength,
   onChange,
 }: InputProps) {
   return (
@@ -32,6 +36,8 @@ export function Input({
         placeholder={placeholder}
         required={required}
         value={value}
+        inputMode={inputMode}
+        maxLength={maxLength}
         onChange={onChange}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${name}-error` : undefined}

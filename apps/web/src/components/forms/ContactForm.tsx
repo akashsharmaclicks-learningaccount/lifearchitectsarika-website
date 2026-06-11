@@ -27,10 +27,10 @@ export function ContactForm() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-
+    const sanitizedValue = name === "phone" ? value.replace(/\D/g, "") : value;
     setFormData((previousData) => ({
       ...previousData,
-      [name]: value,
+      [name]: sanitizedValue,
     }));
     setErrors((previousErrors) => ({
       ...previousErrors,
@@ -45,10 +45,12 @@ export function ContactForm() {
       newErrors.name = "Full name is required.";
     }
 
-    if (!formData.phone.trim()) {
+    const cleanedPhone = formData.phone.trim();
+
+    if (!cleanedPhone) {
       newErrors.phone = "Phone number is required.";
-    } else if (formData.phone.trim().length < 10) {
-      newErrors.phone = "Phone number must be at least 10 digits.";
+    } else if (!/^\d{10}$/.test(cleanedPhone)) {
+      newErrors.phone = "Please enter a valid 10-digit phone number.";
     }
 
     if (formData.email && !/^\S+@\S+\.\S+$/.test(formData.email)) {
@@ -69,7 +71,7 @@ export function ContactForm() {
 
     return Object.keys(newErrors).length === 0;
   };
-  
+
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const isValid = validateForm();
@@ -118,6 +120,8 @@ export function ContactForm() {
         value={formData.phone}
         onChange={handleChange}
         error={errors.phone}
+        inputMode="numeric"
+        maxLength={10}
       />
 
       <Input
