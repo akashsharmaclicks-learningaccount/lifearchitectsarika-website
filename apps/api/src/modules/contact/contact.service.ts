@@ -13,13 +13,17 @@ export const createContactInquiry = async (data: CreateContactInquiryInput) => {
     },
   });
 
-  await sendContactInquiryEmail({
-    name: contactInquiry.name,
-    phone: contactInquiry.phone,
-    email: contactInquiry.email,
-    service: contactInquiry.service,
-    message: contactInquiry.message,
-  });
-  console.log("Email sent successfully.");
+  try {
+    await sendContactInquiryEmail({
+      name: contactInquiry.name,
+      phone: contactInquiry.phone,
+      email: contactInquiry.email,
+      service: contactInquiry.service,
+      message: contactInquiry.message,
+    });
+  } catch (error) {
+    console.error("Failed to send contact inquiry email:", error);
+  }
+
   return contactInquiry;
 };
