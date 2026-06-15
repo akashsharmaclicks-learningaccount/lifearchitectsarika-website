@@ -1,8 +1,5 @@
-import dns from "dns";
 import nodemailer from "nodemailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
-
-dns.setDefaultResultOrder("ipv4first");
 
 type ContactEmailPayload = {
   name: string;
@@ -12,15 +9,16 @@ type ContactEmailPayload = {
   message: string;
 };
 
-const transportOptions: SMTPTransport.Options = {
+const transportOptions = {
   host: process.env.MAIL_HOST,
   port: Number(process.env.MAIL_PORT),
   secure: false,
+  family: 4,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
-};
+} as SMTPTransport.Options;
 
 const transporter = nodemailer.createTransport(transportOptions);
 
