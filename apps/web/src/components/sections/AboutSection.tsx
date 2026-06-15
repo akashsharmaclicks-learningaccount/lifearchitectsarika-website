@@ -1,5 +1,5 @@
 import { aboutContent } from "@/content/about";
-
+import Image from "next/image";
 export function AboutSection() {
   return (
     <section id="about" className="px-6 py-20">
@@ -22,8 +22,14 @@ export function AboutSection() {
 
         <div className="rounded-3xl bg-[var(--section-background)] p-8">
           <div className="rounded-2xl bg-[var(--card)] p-6 shadow-sm">
-            <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-[var(--secondary)] text-4xl font-bold text-[var(--primary)]">
-              {aboutContent.profile.initials}
+            <div className="mx-auto max-w-xs overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--section-background)] p-2 shadow-sm">
+              <Image
+                src="/images/sarika-profile.jpg"
+                alt="Sarika"
+                width={400}
+                height={500}
+                className="h-80 w-full rounded-2xl object-cover object-top"
+              />
             </div>
 
             <h3 className="mt-6 text-center text-xl font-semibold text-foreground">
