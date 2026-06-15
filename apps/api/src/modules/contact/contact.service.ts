@@ -1,8 +1,9 @@
 import { prisma } from "../../config/prisma";
 import { CreateContactInquiryInput } from "./contact.validation";
+import { sendContactInquiryEmail } from "../../common/services/email.service";
 
 export const createContactInquiry = async (data: CreateContactInquiryInput) => {
-  return prisma.contactInquiry.create({
+  const contactInquiry = await prisma.contactInquiry.create({
     data: {
       name: data.name,
       phone: data.phone,
@@ -11,4 +12,14 @@ export const createContactInquiry = async (data: CreateContactInquiryInput) => {
       message: data.message,
     },
   });
+
+  await sendContactInquiryEmail({
+    name: contactInquiry.name,
+    phone: contactInquiry.phone,
+    email: contactInquiry.email,
+    service: contactInquiry.service,
+    message: contactInquiry.message,
+  });
+  console.log("Email sent successfully.");
+  return contactInquiry;
 };
